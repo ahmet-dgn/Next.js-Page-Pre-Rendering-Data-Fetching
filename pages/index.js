@@ -11,6 +11,7 @@ function HomePage(props) {
   );
 }
 export async function getStaticProps() {
+  console.log("(Re-)Generating...");
   const filePath = path.join(process.cwd(), "data", "dummy-backend.json");
   const jsonData = await fs.readFile(filePath);
   const data = JSON.parse(jsonData); //it is convert normal javascript object.
@@ -22,6 +23,7 @@ export async function getStaticProps() {
     props: {
       products: data.products,
     },
+    revalidate: 10,
   };
 }
 export default HomePage;
